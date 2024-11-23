@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Now</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('logo1.png'); /* Add your local image file */
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .email-input {
+            padding: 10px;
+            font-size: 1rem;
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .join-button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .join-button:hover {
+            background-color: #f40612;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Join Now</h1>
+        <input type="email" id="email" class="email-input" placeholder="Enter your email">
+        <br>
+        <button class="join-button" onclick="validateEmail()">Join Now</button>
+    </div>
+
+    <script>
+        // Check if user is already signed in by checking if email exists in localStorage
+        window.onload = function() {
+            const userEmail = localStorage.getItem("userEmail");
+            if (userEmail) {
+                // If email is found, redirect to home.html
+                window.location.href = "home.html"; // Redirect to home.html if user is already signed in
+            }
+        };
+
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const emailValue = emailInput.value;
+
+            // Simple email regex pattern
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (emailValue === "") {
+                alert("Please enter an email address.");
+            } else if (!emailPattern.test(emailValue)) {
+                alert("Please type a valid email address.");
+            } else {
+                // If valid email, redirect to another HTML page (e.g., home.html)
+                localStorage.setItem("userEmail", emailValue); // Save email to localStorage (for lifetime)
+                window.location.href = "home.html"; // Redirect to home.html or any other page
+            }
+        }
+    </script>
+</body>
+</html>
